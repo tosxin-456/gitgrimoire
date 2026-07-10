@@ -1,0 +1,54 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Grimoire {
+  id        String   @id @default(cuid())
+  login     String   @unique
+  name      String?
+  avatarUrl String
+
+  attribute String
+  rank      String
+  squad     String
+  rarity    String
+  overall   Int
+
+  mana       Int
+  spellMastery      Int
+  battleExperience  Int
+  leadership        Int
+  control           Int
+  potential         Int
+
+  totalCommits      Int
+  currentStreak     Int
+  longestStreak     Int
+  followers         Int
+  publicRepos       Int
+  totalStars        Int
+  totalForks        Int
+  totalPRs          Int
+  mergedPRs         Int
+  closedIssues      Int
+  organizations     Int
+  accountAgeDays    Int
+
+  previousRank  String?
+  messages      String @default("[]")
+  topLanguage   String?
+  languagesJson String @default("[]")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([overall])
+  @@index([mana])
+  @@index([rank])
+}

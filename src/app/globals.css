@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+:root {
+  --background: #07050d;
+  --background-elevated: #0f0b1a;
+  --foreground: #ede4ff;
+  --foreground-muted: #a89cc8;
+
+  --gold: #e8c468;
+  --gold-bright: #f5dfa0;
+  --gold-dim: #8a713a;
+
+  --clover-green: #3fae72;
+  --arcane-purple: #6b3fae;
+  --arcane-purple-deep: #2a1747;
+  --mana-blue: #4f6fd1;
+
+  --rarity-common: #8a8a94;
+  --rarity-bronze: #b0703c;
+  --rarity-silver: #c7c9d6;
+  --rarity-gold: #e8c15a;
+  --rarity-three-leaf: #45c47a;
+  --rarity-four-leaf: #8a4fe0;
+  --rarity-five-leaf: #c4173f;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-elevated: var(--background-elevated);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-dim: var(--gold-dim);
+
+  --color-clover-green: var(--clover-green);
+  --color-arcane-purple: var(--arcane-purple);
+  --color-arcane-purple-deep: var(--arcane-purple-deep);
+  --color-mana-blue: var(--mana-blue);
+
+  --color-rarity-common: var(--rarity-common);
+  --color-rarity-bronze: var(--rarity-bronze);
+  --color-rarity-silver: var(--rarity-silver);
+  --color-rarity-gold: var(--rarity-gold);
+  --color-rarity-three-leaf: var(--rarity-three-leaf);
+  --color-rarity-four-leaf: var(--rarity-four-leaf);
+  --color-rarity-five-leaf: var(--rarity-five-leaf);
+
+  --font-display: var(--font-cinzel);
+  --font-body: var(--font-eb-garamond);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), Georgia, serif;
+}
+
+.font-display {
+  font-family: var(--font-display), serif;
+}
+
+/* ---------------------------------------------------------------- */
+/* Ambient magical background                                       */
+/* ---------------------------------------------------------------- */
+
+.arcane-backdrop {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(107, 63, 174, 0.28), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 85% 90%, rgba(79, 111, 209, 0.16), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 10% 85%, rgba(232, 196, 104, 0.08), transparent 70%),
+    var(--background);
+}
+
+.arcane-backdrop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgba(237, 228, 255, 0.55) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- */
+/* Particles                                                        */
+/* ---------------------------------------------------------------- */
+
+@keyframes float-particle {
+  0% {
+    transform: translate3d(0, 0, 0) scale(var(--p-scale, 1));
+    opacity: 0;
+  }
+  10% {
+    opacity: var(--p-opacity, 0.7);
+  }
+  90% {
+    opacity: var(--p-opacity, 0.7);
+  }
+  100% {
+    transform: translate3d(var(--p-drift-x, 20px), var(--p-drift-y, -140px), 0) scale(var(--p-scale, 1));
+    opacity: 0;
+  }
+}
+
+.particle {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, var(--gold-bright) 0%, var(--gold) 45%, transparent 75%);
+  filter: blur(0.3px);
+  animation: float-particle linear infinite;
+  will-change: transform, opacity;
+}
+
+/* ---------------------------------------------------------------- */
+/* Runes & magic circles                                            */
+/* ---------------------------------------------------------------- */
+
+@keyframes rune-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rune-spin-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes rune-pulse {
+  0%, 100% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 4px rgba(232, 196, 104, 0.35));
+  }
+  50% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 14px rgba(232, 196, 104, 0.65));
+  }
+}
+
+.rune-ring-slow {
+  animation: rune-spin 60s linear infinite;
+}
+
+.rune-ring-medium {
+  animation: rune-spin-reverse 40s linear infinite;
+}
+
+.rune-ring-pulse {
+  animation: rune-pulse 4s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------- */
+/* Glow text & gold shimmer                                          */
+/* ---------------------------------------------------------------- */
+
+@keyframes shimmer-sweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--gold-dim) 20%,
+    var(--gold-bright) 40%,
+    var(--gold) 60%,
+    var(--gold-dim) 80%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer-sweep 5s linear infinite;
+}
+
+.glow-gold {
+  text-shadow: 0 0 12px rgba(232, 196, 104, 0.55), 0 0 32px rgba(232, 196, 104, 0.25);
+}
+
+@keyframes soft-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 18px 2px rgba(232, 196, 104, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 32px 6px rgba(232, 196, 104, 0.45);
+  }
+}
+
+.glow-pulse {
+  animation: soft-glow-pulse 3s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------- */
+/* 3D book stage                                                    */
+/* ---------------------------------------------------------------- */
+
+.perspective-1600 {
+  perspective: 1600px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+::selection {
+  background: var(--arcane-purple);
+  color: var(--foreground);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--arcane-purple-deep);
+  border-radius: 9999px;
+}
