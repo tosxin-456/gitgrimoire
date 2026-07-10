@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, type Easing } from "framer-motion";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { GitHubIdentityCard } from "@/components/grimoire/GitHubIdentityCard";
 import { GrimoireCover } from "@/components/grimoire/GrimoireCover";
 import { StatCompareBar } from "@/components/duel/StatCompareBar";
 import { ATTRIBUTE_STYLE } from "@/lib/data/presentation";
@@ -365,6 +366,12 @@ export function DuelScene({ a, b, result }: { a: PublicGrimoire; b: PublicGrimoi
               </motion.div>
 
               <Combatant data={b} side="right" isWinner={result.winner === "b"} isDraw={isDraw} />
+            </div>
+
+            {/* Both combatants' real GitHub identities, side by side. */}
+            <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <GitHubIdentityCard login={a.login} name={a.name} avatarUrl={a.avatarUrl} />
+              <GitHubIdentityCard login={b.login} name={b.name} avatarUrl={b.avatarUrl} />
             </div>
 
             <div className="w-full max-w-xl flex flex-col gap-2.5">
