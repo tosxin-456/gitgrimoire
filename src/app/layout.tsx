@@ -16,10 +16,35 @@ const ebGaramond = EB_Garamond({
   style: ["normal", "italic"],
 });
 
+const title = "GitGrimoire — Every developer deserves a Grimoire";
+const description =
+  "Type your GitHub username and receive a Grimoire forged from your real contributions. Discover your Magic Attribute, Rank, and Squad.";
+
 export const metadata: Metadata = {
-  title: "GitGrimoire — Every developer deserves a Grimoire",
-  description:
-    "Type your GitHub username and receive a Grimoire forged from your real contributions. Discover your Magic Attribute, Rank, and Squad.",
+  metadataBase: new URL("https://gitgrimoire.vercel.app"),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: "https://gitgrimoire.vercel.app",
+    siteName: "GitGrimoire",
+    type: "website",
+    images: [
+      {
+        url: "/git_logo.jpg",
+        width: 735,
+        height: 386,
+        alt: "GitGrimoire",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/git_logo.jpg"],
+  },
 };
 
 export default function RootLayout({
