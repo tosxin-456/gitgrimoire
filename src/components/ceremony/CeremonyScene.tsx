@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { GitHubIdentityCard } from "@/components/grimoire/GitHubIdentityCard";
 import { GrimoireBook } from "@/components/grimoire/GrimoireBook";
 import { SealedGrimoireCover } from "@/components/ceremony/SealedGrimoireCover";
 import { MagicCircleBackdrop } from "@/components/visual/MagicCircleBackdrop";
@@ -198,6 +199,15 @@ export function CeremonyScene({ login }: { login: string }) {
                   transition={{ delay: 0.9, duration: 0.7 }}
                   className="w-full flex flex-col items-center gap-6"
                 >
+                  {/* Who this grimoire belongs to, with a link back to the real GitHub profile. */}
+                  <div className="w-full max-w-2xl">
+                    <GitHubIdentityCard
+                      login={result.grimoire.login}
+                      name={result.grimoire.name}
+                      avatarUrl={result.grimoire.avatarUrl}
+                    />
+                  </div>
+
                   {/* Actions live above the book so they're visible without scrolling. */}
                   <div className="flex flex-wrap gap-3 justify-center">
                     <Link
