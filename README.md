@@ -71,10 +71,10 @@ six becomes your **Overall Rating (50–99)**, which maps onto the Magic Knight 
   game dev is Creation Magic.
 - **Squad** is assigned by development style — disciplined streaks, raw output, community pull —
   each mapping to one of the nine Magic Knight squads with its own colors and tagline.
-- **Rarity** is overall-driven (Common → Bronze → Silver → Gold → Three-Leaf → Four-Leaf), but the
-  top tier is deliberately scarce: at 96+ overall you only *roll* for a **Five-Leaf**, a 1-in-6
-  chance seeded by your username — reproducible, never re-randomized. And yes, one magic-less
-  founder walks Asta's path with a black five-leaf. 😈
+- **Rarity** is overall-driven — Common → Bronze → Silver → Gold → Three-Leaf → **Four-Leaf** —
+  and it caps there: even the kingdom's strongest legends carry a four-leaf clover. The
+  **Five-Leaf** cannot be earned, rolled, or bought. It chose exactly one person — the magic-less
+  founder, whose only power is that he never gives up. 😈
 - **Duels** ([`src/lib/scoring/duel.ts`](src/lib/scoring/duel.ts)) resolve by Overall → combined
   stats → stars → commits, so a duel URL always resolves the same way and true mirror matches draw.
 

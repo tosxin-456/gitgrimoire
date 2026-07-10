@@ -18,10 +18,12 @@ export function computeGrimoire(stats: GithubStats): Grimoire {
   // five-leaf grimoire, wielding Anti Magic. Rank and stats stay earned.
   const attribute = founder ? "Anti Magic" : computeMagicAttribute(stats);
   const squad = founder ? "Black Bulls" : computeSquad(stats, cardStats);
-  const rarity = founder ? "Five-Leaf" : computeRarity(overall, stats.login);
+  const rarity = founder ? "Five-Leaf" : computeRarity(overall);
   const messages = computeDynamicMessages(stats, overall, rank);
   if (founder) {
-    messages.unshift("The magic-less founder — the one who forged GitGrimoire itself.");
+    messages.unshift(
+      "The magic-less founder — the one who forged GitGrimoire itself. His power: he never gives up."
+    );
   }
 
   return {

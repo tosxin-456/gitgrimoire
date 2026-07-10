@@ -1,16 +1,12 @@
 import type { GrimoireRarity } from "@/types/grimoire";
-import { seededUnit } from "./utils";
 
 /**
- * Rarity is mostly overall-driven, but the top tier is deliberately scarce:
- * only a fraction of eligible (96+) grimoires roll a Five-Leaf. The roll is
- * seeded by login so it's reproducible, not re-randomized on every view.
+ * Rarity is overall-driven and caps at Four-Leaf — even the kingdom's
+ * strongest carry a four-leaf clover. The five-leaf chooses exactly one
+ * person: the magic-less founder (see computeGrimoire's founder branch),
+ * whose only power is that he never gives up.
  */
-export function computeRarity(overall: number, login: string): GrimoireRarity {
-  if (overall >= 96) {
-    const luck = seededUnit(`five-leaf:${login}`);
-    return luck < (1 / 6) ? "Five-Leaf" : "Four-Leaf";
-  }
+export function computeRarity(overall: number): GrimoireRarity {
   if (overall >= 91) return "Four-Leaf";
   if (overall >= 85) return "Three-Leaf";
   if (overall >= 77) return "Gold";
