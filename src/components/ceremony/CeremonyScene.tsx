@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { GitHubIdentityCard } from "@/components/grimoire/GitHubIdentityCard";
 import { GrimoireBook } from "@/components/grimoire/GrimoireBook";
+import { ScoutingReport } from "@/components/grimoire/ScoutingReport";
 import { SealedGrimoireCover } from "@/components/ceremony/SealedGrimoireCover";
 import { MagicCircleBackdrop } from "@/components/visual/MagicCircleBackdrop";
 import { ParticleField } from "@/components/visual/ParticleField";
@@ -211,22 +212,16 @@ export function CeremonyScene({ login }: { login: string }) {
                   {/* Actions live above the book so they're visible without scrolling. */}
                   <div className="flex flex-wrap gap-3 justify-center">
                     <Link
-                      href={`/grimoire/${encodeURIComponent(result.grimoire.login)}`}
+                      href={`/duel?a=${encodeURIComponent(result.grimoire.login)}`}
                       className="font-display text-xs tracking-[0.15em] uppercase px-5 py-2.5 rounded-full bg-gold text-black hover:bg-gold-bright transition-colors"
                     >
-                      View Full Grimoire
+                      Duel a Rival
                     </Link>
                     <Link
                       href="/leaderboard"
                       className="font-display text-xs tracking-[0.15em] uppercase px-5 py-2.5 rounded-full border border-gold/40 text-gold-bright hover:bg-gold/10 transition-colors"
                     >
                       View Leaderboard
-                    </Link>
-                    <Link
-                      href={`/duel?a=${encodeURIComponent(result.grimoire.login)}`}
-                      className="font-display text-xs tracking-[0.15em] uppercase px-5 py-2.5 rounded-full border border-gold/40 text-gold-bright hover:bg-gold/10 transition-colors"
-                    >
-                      Duel a Rival
                     </Link>
                   </div>
 
@@ -239,6 +234,9 @@ export function CeremonyScene({ login }: { login: string }) {
                       {result.grimoire.stats.mana} / 99
                     </p>
                   </div>
+
+                  {/* The full record lives right here — no separate page needed. */}
+                  <ScoutingReport grimoire={result.grimoire} />
                 </motion.div>
               )}
             </motion.div>
