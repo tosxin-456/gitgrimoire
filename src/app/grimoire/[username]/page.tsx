@@ -98,31 +98,49 @@ export default async function GrimoirePage({ params }: PageProps) {
       </div>
 
       {/* GitHub identity — gitfut-style: who this is and a direct link to their real profile. */}
-      <div className="w-full max-w-2xl rounded-xl border border-white/10 bg-background-elevated/60 p-5 flex items-center gap-4">
-        <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden shrink-0 ring-1 ring-gold/30">
-          <Image src={grimoire.avatarUrl} alt={grimoire.login} fill sizes="64px" className="object-cover" unoptimized />
-        </div>
-        <div className="flex-1 min-w-0">
-          <p className="font-display text-base sm:text-lg text-gold-bright truncate">
-            {grimoire.name ?? grimoire.login}
-          </p>
+      <div className="w-full max-w-2xl flex flex-col gap-4">
+        <div className="rounded-xl border border-white/10 bg-background-elevated/60 p-5 flex items-center gap-4">
+          <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden shrink-0 ring-1 ring-gold/30">
+            <Image src={grimoire.avatarUrl} alt={grimoire.login} fill sizes="64px" className="object-cover" unoptimized />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="font-display text-base sm:text-lg text-gold-bright truncate">
+              {grimoire.name ?? grimoire.login}
+            </p>
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-foreground-muted hover:text-gold-bright transition-colors truncate block"
+            >
+              github.com/{grimoire.login} ↗
+            </a>
+          </div>
           <a
             href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs text-foreground-muted hover:text-gold-bright transition-colors truncate block"
+            className="shrink-0 font-display text-[0.6rem] sm:text-[0.65rem] tracking-[0.15em] uppercase px-3 sm:px-4 py-2 rounded-full border border-gold/40 text-gold-bright hover:bg-gold/10 transition-colors whitespace-nowrap"
           >
-            github.com/{grimoire.login} ↗
+            View on GitHub
           </a>
         </div>
-        <a
-          href={githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="shrink-0 font-display text-[0.6rem] sm:text-[0.65rem] tracking-[0.15em] uppercase px-3 sm:px-4 py-2 rounded-full border border-gold/40 text-gold-bright hover:bg-gold/10 transition-colors whitespace-nowrap"
-        >
-          View on GitHub
-        </a>
+
+        {/* Primary actions sit above the book so they're never below the fold. */}
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <Link
+            href={`/duel?a=${encodeURIComponent(grimoire.login)}`}
+            className="font-display text-xs tracking-[0.15em] uppercase px-5 py-2.5 rounded-full bg-gold text-black hover:bg-gold-bright transition-colors"
+          >
+            Challenge to a Duel
+          </Link>
+          <Link
+            href="/leaderboard"
+            className="font-display text-xs tracking-[0.15em] uppercase px-5 py-2.5 rounded-full border border-gold/40 text-gold-bright hover:bg-gold/10 transition-colors"
+          >
+            View Leaderboard
+          </Link>
+        </div>
       </div>
 
       <GrimoireBook data={grimoire} />
@@ -182,20 +200,6 @@ export default async function GrimoirePage({ params }: PageProps) {
         </div>
       )}
 
-      <div className="flex flex-wrap items-center justify-center gap-4">
-        <Link
-          href={`/duel?a=${encodeURIComponent(grimoire.login)}`}
-          className="font-display text-xs tracking-[0.2em] uppercase px-6 py-3 rounded-full bg-gold text-black hover:bg-gold-bright transition-colors"
-        >
-          Challenge to a Duel
-        </Link>
-        <Link
-          href="/leaderboard"
-          className="font-display text-xs tracking-[0.2em] uppercase px-6 py-3 rounded-full border border-gold/40 text-gold-bright hover:bg-gold/10 transition-colors"
-        >
-          View Leaderboard
-        </Link>
-      </div>
     </main>
   );
 }

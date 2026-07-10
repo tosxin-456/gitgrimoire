@@ -198,27 +198,36 @@ export function CeremonyScene({ login }: { login: string }) {
                   transition={{ delay: 0.9, duration: 0.7 }}
                   className="w-full flex flex-col items-center gap-6"
                 >
-                  <GrimoireBook data={result.grimoire} open hint={false} />
+                  {/* Actions live above the book so they're visible without scrolling. */}
+                  <div className="flex flex-wrap gap-3 justify-center">
+                    <Link
+                      href={`/grimoire/${encodeURIComponent(result.grimoire.login)}`}
+                      className="font-display text-xs tracking-[0.15em] uppercase px-5 py-2.5 rounded-full bg-gold text-black hover:bg-gold-bright transition-colors"
+                    >
+                      View Full Grimoire
+                    </Link>
+                    <Link
+                      href="/leaderboard"
+                      className="font-display text-xs tracking-[0.15em] uppercase px-5 py-2.5 rounded-full border border-gold/40 text-gold-bright hover:bg-gold/10 transition-colors"
+                    >
+                      View Leaderboard
+                    </Link>
+                    <Link
+                      href={`/duel?a=${encodeURIComponent(result.grimoire.login)}`}
+                      className="font-display text-xs tracking-[0.15em] uppercase px-5 py-2.5 rounded-full border border-gold/40 text-gold-bright hover:bg-gold/10 transition-colors"
+                    >
+                      Duel a Rival
+                    </Link>
+                  </div>
+
+                  {/* The grimoire arrives sealed — the owner opens it themselves. */}
+                  <GrimoireBook data={result.grimoire} />
+
                   <div className="flex flex-col items-center gap-1">
                     <p className="text-xs uppercase tracking-[0.25em] text-foreground-muted">Mana Level</p>
                     <p className="font-display text-3xl text-mana-blue glow-gold">
                       {result.grimoire.stats.mana} / 99
                     </p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-4 justify-center pt-2">
-                    <Link
-                      href={`/grimoire/${result.grimoire.login}`}
-                      className="font-display text-sm tracking-[0.15em] uppercase px-6 py-3 rounded-full bg-gold text-black hover:bg-gold-bright transition-colors"
-                    >
-                      View Your Grimoire
-                    </Link>
-                    <Link
-                      href="/leaderboard"
-                      className="font-display text-sm tracking-[0.15em] uppercase px-6 py-3 rounded-full border border-gold/40 text-gold-bright hover:bg-gold/10 transition-colors"
-                    >
-                      View Leaderboard
-                    </Link>
                   </div>
                 </motion.div>
               )}
